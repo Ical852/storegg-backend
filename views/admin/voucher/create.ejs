@@ -1,0 +1,74 @@
+<%- include('../../partials/header.ejs') %>
+    <%- include('../../partials/navbar.ejs') %>
+        <%- include('../../partials/sidebar.ejs') %>
+            <div class="content-wrapper">
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>Tambah Voucher</h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="/voucher">Voucher</a></li>
+                                    <li class="breadcrumb-item active">Tambah Voucher</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Tambah Voucher</h3>
+                                    </div>
+                                    <form action="/voucher/create" method="post" enctype="multipart/form-data">
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Nama Game</label>
+                                                <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan Nama Game" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Kategori</label>
+                                                <select class="form-control select2" style="width: 100%;" name="category" required>
+                                                    <option selected="selected" disabled>Pilih Kategori</option>
+                                                    <% category.map(data => { %>
+                                                        <option value="<%= data.id %>"><%= data.name %></option>
+                                                    <% }) %> 
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Nominal</label>
+                                                <div class="select2-purple">
+                                                    <select class="form-control select2" multiple="multiple" style="width: 100%;" name="nominals" required data-placeholder="Pilih Nominal">
+                                                        <% nominal.map(data => { %>
+                                                            <option value="<%= data.id %>"><%= data.coinName %> <%= data.price %> </option>
+                                                        <% }) %> 
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Thumbnail</label>
+                                                <input type="file" class="form-control" id="image" name="image" placeholder="Masukkan Gambar" 
+                                                    onchange="document.getElementById('preview').src = window.URL.createObjectURL(this.files[0])">
+                                                <br>
+                                                <img src="" alt="preview" id="preview" width="200px">
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+    <%- include('../../partials/footer.ejs') %>
+<%- include('../../partials/js.ejs') %>

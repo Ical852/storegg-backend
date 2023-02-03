@@ -1,0 +1,35 @@
+<table id="example2" class="table table-bordered table-hover">
+    <a href="/nominal/create">
+        <button class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Tambah Nominal</button>
+    </a>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Coin Name</th>
+            <th>Jumlah Koin</th>
+            <th>Harga Koin</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% nominal.map((data, index) => { %>
+            <tr>
+                <td><%= index+1 %> </td>
+                <td><%= data.coinName %> </td>
+                <td><%= data.coinQuantity %> </td>
+                <td><%= data.price %> </td>
+                <td>
+                    <a href="/nominal/edit/<%= data.id %>">
+                        <button class="btn btn-success">
+                            <i class="fa fa-edit"></i> Edit
+                        </button>
+                    </a>
+                    <form action="/nominal/delete/<%= data.id %>" class="d-inline" method="post">
+                        <button class="btn btn-danger" onclick="return confirm(`delete data <%= data.coinName %> ?`)">
+                            <i class="fa fa-trash"></i> Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %> 
+</table>

@@ -1,0 +1,45 @@
+<table id="example2" class="table table-bordered table-hover">
+    <a href="/payment/create">
+        <button class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Tambah Payment</button>
+    </a>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>Tipe</th>
+            <th>Banks</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% payment.map((data, index) => { %>
+            <tr>
+                <td><%= index+1 %></td>
+                <td><%= data.type %></td>
+                <td>
+                    <% data.banks.map(data => { %>
+                        <span class="badge badge-warning">
+                            <%= data.name %> - <%= data.bankName %> - <%= data.noRekening %>
+                        </span>
+                    <% }) %>
+                </td>
+                <td>
+                    <span class="badge badge-<%= data.status == 'Y' ? 'success' : 'danger' %>">
+                        <%= data.status=='Y' ? 'Aktif' : 'Tidak Aktif' %>
+                    </span>
+                </td>
+                <td>
+                    <a href="/payment/edit/<%= data.id %>">
+                        <button class="btn btn-success">
+                            <i class="fa fa-edit"></i> Edit
+                        </button>
+                    </a>
+                    <form action="/payment/delete/<%= data.id %>" class="d-inline" method="post">
+                        <button class="btn btn-danger" onclick="return confirm(`delete data tipe pembayaran <%= data.type %> ?`)">
+                            <i class="fa fa-trash"></i> Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %> 
+</table>
